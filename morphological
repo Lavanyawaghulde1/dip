@@ -1,0 +1,40 @@
+import cv2 as cv
+import numpy as np
+import matplotlib.pyplot as plt
+binary_image = cv.imread(&#39;L.png&#39;, cv.IMREAD_GRAYSCALE)
+kernel = np.ones((5, 5), np.uint8)
+eroded_image = cv.erode(binary_image, kernel, iterations=2)
+dilated_image = cv.dilate(binary_image, kernel, iterations=2)
+opened_image = cv.morphologyEx(binary_image, cv.MORPH_OPEN, kernel)
+closed_image = cv.morphologyEx(binary_image, cv.MORPH_CLOSE, kernel)
+plt.figure(figsize=(12, 6))
+plt.subplot(2, 3, 1)
+plt.imshow(binary_image, cmap=&#39;gray&#39;)
+plt.title(&#39;Original Binary Image&#39;)
+plt.subplot(2, 3, 2)
+plt.imshow(eroded_image, cmap=&#39;gray&#39;)
+plt.title(&#39;Eroded Image&#39;)
+plt.subplot(2, 3, 3)
+plt.imshow(dilated_image, cmap=&#39;gray&#39;)
+plt.title(&#39;Dilated Image&#39;)
+plt.subplot(2, 3, 4)
+
+plt.imshow(opened_image, cmap='gray')
+plt.title(&#39;Opened Image&#39;)
+plt.subplot(2, 3, 5)
+plt.imshow(closed_image, cmap='gray')
+plt.title(&#39;Closed Image&#39;)
+plt.show()
+Output:
+
+Conclusion :
+In this experiment, the morphological operations were crucial in enhancing and
+manipulating the image’s structure .Dilation expands the bright
+regions, thickening objects and filling small gaps, while erosion reduces the bright
+areas, removing noise and thinning the objects.Opening(erosion followed by dilation)
+effectively removes small noise without altering the larger objects, preserving their
+overall structure.Closing(dilation followed by erosion) fills small holes and connects
+disjointed areas, making the objects more solid. Lastly, the gradient operation
+emphasizes the boundaries by highlighting object edges. Collectively, these steps refine
+the object outlines and improve the image’s clarity, making it more suitable for further
+analysis
