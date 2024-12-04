@@ -1,0 +1,53 @@
+clc;
+close all;
+clear all;
+I=imread(&#39;sixth.bmp&#39;);
+figure(1);
+subplot(2,2,1);
+imshow(I);
+% Convert to grayscale if it&#39;s a colored image
+if size(I, 3) == 3
+I = rgb2gray(I);
+end
+% Define a weighted average filter kernel (3x3)
+kernel = [1 2 1;
+2 4 2;
+1 2 1] / 16; % Normalized by 16 to make the sum 1
+
+% Apply the filter using imfilter
+output_img = imfilter(I, kernel, &#39;same&#39;);
+% Display the filtered image in the second subplot
+subplot(2,2,2);
+imshow(output_img);
+title(&#39;Weighted Average Filtered Image&#39;);
+noise_img=imnoise(output_img, "salt &amp; pepper";, 0.02);
+subplot(2,2,3);
+imshow(noise_img);
+title(&#39;Adding salt and pepper noise&#39;);
+
+median_filtered_img = medfilt2(noise_img, [3 3]);
+subplot(2,2,4);
+imshow(median_filtered_img);
+title(&#39;Median Filtered Image&#39;);
+kernel1 = [-1, -1, -1
+-1, 8, -1
+-1, -1, -1];
+laplacian_filtered_img = imfilter(I, kernel1, &#39;same&#39;);
+figure(2);
+subplot(2,2,1);
+imshow(laplacian_filtered_img);
+title(&#39;Laplacian Filtered Image&#39;);
+
+Output:
+
+Conclusion :
+The MATLAB code demonstrates key image processing techniques, including filtering,
+noise addition, and edge detection. It applies a weighted average filter to smooth the
+image, adds salt-and-pepper noise to simulate imperfections, and uses a median filter to
+remove that noise. Additionally, it employs a Laplacian filter for edge enhancement and
+the Sobel filter for detecting edges by calculating gradient magnitudes in both horizontal
+and vertical directions. The results are displayed in two figures: the first shows the
+original image, filtered images, and denoised version, while the second presents the
+Laplacian and Sobel filtered images. These methods are essential for noise reduction,
+image enhancement, and edge detection, which are crucial for various computer vision
+and image analysis tasks.
