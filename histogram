@@ -1,0 +1,113 @@
+clc;
+close all;
+clear all;
+figure(1);
+image1 = imread(&quot;photo.png&quot;);
+subplot(2,2,1);
+imshow(image1);
+title(&#39;Original image&#39;);
+subplot(2,2,2);
+imhist(image1);
+title(&#39;Histogram of original image&#39;);
+hist =histeq(image1);
+subplot(2,2,3);
+imshow(hist);
+title(&quot;Equalized Image&quot;);
+subplot(2,2,4);
+imhist(hist);
+title(&#39;Equalized image histogram&#39;);
+figure(2);
+subplot(2,2,1);
+image1 = imread(&quot;photo.png&quot;);
+imshow(image1);
+title(&#39;Original image&#39;);
+subplot(2,2,2);
+I2 = im2double(image1);
+
+D = dct2(I2);
+imshow(D);
+title(&#39;Original image&#39;);
+subplot(2,2,3);
+I3 = im2double(D);
+Output:
+
+Conclusion :
+In this experiment , the histogram equalization improves image contrast by redistributing
+pixel intensity values. In the original image, pixel values may be concentrated in certain
+ranges, resulting in poor contrast. After equalization, the image shows a more even
+distribution of intensities, enhancing both bright and dark areas and revealing previously
+hidden details. This technique is especially useful for images with limited brightness
+ranges, making details more visible and improving overall clarity.
+
+
+
+(b) To perform image compression using DCT (discrete cosine transform) and
+reconstruct an original image using IDCT.
+clc;
+close all;
+clear all;
+figure(1);
+subplot(2,2,1);
+I = imread(&#39;pout.tif&#39;);
+I2 = im2double(I);
+imshow(I2);
+imfinfo(&#39;pout.tif&#39;)
+title(&#39;Original image&#39;);
+%DCT CONVERSION
+subplot(2,2,2);
+D = dct2(I2);
+imshow(D);
+imsave;
+imfinfo(&#39;dctimg.bmp&#39;)
+title(&#39;DCT image&#39;);
+%IDCT CONVERSION
+subplot(2,2,3);
+I3 = im2double(D);
+I4 = idct2(I3);
+imshow(I4);
+imsave;
+imfinfo(&#39;idctimg.bmp&#39;)
+title(&#39;IDCT image&#39;);
+
+Output:
+
+Original Image Info :
+Filename: &#39;/MATLAB/toolbox/images/imdata/pout.tif&#39;
+FileModDate: &#39;21-Jul-2023 14:28:22&#39;
+FileSize: 69296
+Format: &#39;tif&#39;
+FormatVersion: []
+Width: 240
+Height: 291
+BitDepth: 8
+ColorType: &#39;grayscale&#39;
+
+DCT Image info :
+Filename: &#39;/MATLAB Drive/dctimg.bmp&#39;
+FileModDate: &#39;24-Sep-2024 04:52:00&#39;
+FileSize: 70918
+Format: &#39;bmp&#39;
+FormatVersion: &#39;Version 3 (Microsoft Windows 3.x)&#39;
+Width: 240
+Height: 291
+BitDepth: 8
+ColorType: &#39;indexed&#39;
+IDCT Image info :
+Filename: &#39;/MATLAB Drive/idctimg.bmp&#39;
+FileModDate: &#39;24-Sep-2024 04:52:04&#39;
+FileSize: 70918
+Format: &#39;bmp&#39;
+FormatVersion: &#39;Version 3 (Microsoft Windows 3.x)&#39;
+Width: 240
+Height: 291
+BitDepth: 8
+ColorType: &#39;indexed&#39;
+
+Conclusion :
+In this experiment , we use the Discrete Cosine Transform (DCT) to compress
+the image. DCT converts the image into a format that focuses on its key details
+while reducing less important information, which makes the file size smaller. After
+compression, the Inverse Discrete Cosine Transform (IDCT) is used to
+reconstruct the image from the compressed data. The resulting image closely
+resembles the original, with only minor quality differences. This technique is
+effective for reducing file size while maintaining a good level of visual quality.  
