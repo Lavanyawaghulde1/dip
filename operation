@@ -1,0 +1,82 @@
+clc;
+close all;
+clear all;
+figure(1);
+%Read original image
+subplot(2,2,1);
+I = imread(&#39;peppers.png&#39;);
+imshow(I);
+title(&#39;Original image&#39;);
+%Convert image into seperate channels
+IR = I(:, :, 1);
+IG = I(:, :, 2);
+IB = I(:, :, 3);
+subplot(2,2,2);
+imshow(IR);
+title(&#39;Red channel&#39;);
+subplot(2,2,3);
+imshow(IG);
+title(&#39;Green channel&#39;);
+subplot(2,2,4);
+imshow(IB);
+title(&#39;Blue channel&#39;);
+%Binarize images
+IRbi = imbinarize(IR);
+IGbi = imbinarize(IG);
+IBbi = imbinarize(IB);
+
+%Arithmetic operations
+figure(2);
+subplot(2,2,1);
+imshow(IR);
+title(&#39;Red channel&#39;);
+subplot(2,2,2);
+imshow(IG);
+title(&#39;Green channel&#39;);
+subplot(2,2,3);
+add = imadd(IRbi,IGbi);
+imshow(add);
+title(&#39;Adding red green&#39;);
+subplot(2,2,4);
+sub = imsubtract(IRbi,IGbi);
+imshow(sub);
+title(&#39;Subtract green from red&#39;);
+%Binary operations
+figure(3);
+subplot(2,2,1);
+imshow(IR);
+title(&#39;Red channel&#39;);
+subplot(2,2,2);
+imshow(IB);
+title(&#39;Blue channel&#39;);
+subplot(2,2,3);
+and = bitand(IRbi,IBbi);
+imshow(and);
+title(&#39;Red and Blue&#39;);
+subplot(2,2,4);
+xor = bitxor(IRbi,IBbi);
+imshow(xor);
+title(&#39;Red or Blue&#39;);
+%Spatial transformation
+figure(4);
+subplot(2,2,1);
+imshow(I);
+title(&#39;Original image&#39;);
+subplot(2,2,3);
+rotate = imrotate(I, 90);
+imshow(rotate);
+title(&#39;Rotating Image&#39;);
+subplot(2,2,4);
+resize = imresize(I, 0.05);
+imshow(resize);
+title(&#39;Scaling Image&#39;);
+Output:
+
+Conclusion :
+This experiment highlighted the effectiveness of various image processing techniques in
+enhancing and analyzing visual data. By utilizing arithmetic and logical operations, we improved
+our ability to extract and analyze features within the image. The spatial transformations further
+illustrated the impact of geometric manipulation on image interpretation. Understanding these
+techniques is essential for advanced applications in computer vision, image analysis, and
+graphic design, laying the groundwork for further exploration and practical applications in the
+field.
