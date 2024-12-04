@@ -1,0 +1,31 @@
+clc;
+close all;
+clear all;
+Ioriginal = imread(&#39;cameraman.tif&#39;);
+subplot(2,2,1);
+imshow(Ioriginal)
+title(&#39;Original Image&#39;)
+PSF = fspecial(&#39;motion&#39;,15, 90);
+Idouble = im2double(Ioriginal);
+blurred = imfilter(Idouble, PSF,&#39;conv&#39;,&#39;circular&#39;);
+subplot(2,2,2);
+imshow(blurred)
+title(&#39;Blurred Image&#39;)
+wnr1 = deconvwnr(blurred, PSF);
+subplot(2,2,3);
+imshow(wnr1)
+title(&#39;Restored Deblurred Image&#39;)
+%Calculate SSIM &amp; PSIM
+SSIM = ssim(wnr1, Idouble);
+PSNR = 10 * log (psnr(wnr1, Idouble));
+display(SSIM);
+display(PSNR);
+
+Output:
+
+Conclusion :
+The Wiener filter successfully restored the blurred image by reducing motion blur and
+noise. The restoration showed significant improvement in image clarity, as confirmed by
+high SSIM and PSNR values.
+SSIM = 1.0000
+PSNR = 56.5875
