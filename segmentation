@@ -1,0 +1,47 @@
+clc;
+clear all;
+close all;
+figure(1);
+img=imread(&#39;coins.png&#39;);
+subplot(2,2,1);
+imshow(img);
+title(&#39;Original image&#39;);
+hist=imhist(img);
+subplot(2,2,2);
+stem(hist);
+title(&#39;Histogram&#39;)
+[row,col]=size(img);
+for i=1:row
+for j=1:col
+if(img(i,j)&gt;0 &amp;&amp; img(i,j)&lt;93)
+red(i,j)=255;
+green(i,j)=255;
+blue(i,j)=0;
+else if(img(i,j)&gt;93 &amp;&amp; img(i,j)&lt;210)
+red(i,j)=255;
+green(i,j)=0;
+
+blue(i,j)=255;
+else if(img(i,j)&gt;210 &amp;&amp; img(i,j)&lt;255)
+red(i,j)=0;
+green(i,j)=255;
+blue(i,j)=255;
+end
+end
+end
+end
+End
+subplot(2,2,3);
+img_concat=cat(3,red, green, blue);
+imshow(img_concat);
+title(&#39;Thresholded image&#39;);
+
+Output:
+
+Conclusion :
+In this experiment, the threshold method effectively segmented distinct regions within
+the image, successfully highlighting key features for analysis. The application of
+pseudocoloring further enhanced visualization, allowing for clearer interpretation of the
+segmented areas by assigning distinct colors to each region. This combination not only
+improved the clarity of the results but also facilitated a more intuitive understanding of
+the spatial relationships within the image.
